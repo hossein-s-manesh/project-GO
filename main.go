@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"myapp/config"
-
+	"myapp/routing"
 	"github.com/labstack/echo/v4"
 )
 
@@ -24,7 +24,7 @@ func main()  {
 
 	//init server
 
-	e:=echo.New()
+	server:=echo.New()
 
 
 
@@ -32,15 +32,7 @@ func main()  {
 	//routing
 
 
-	e.GET("/icon",func(c echo.Context) error {
-
-		fmt.Println("welcom to icon")
-
-		return nil
-	})
-
-
-
+	routing.SetRout(server)
 	//middleware
 	
 	
@@ -49,7 +41,7 @@ func main()  {
 	
 	//start server
 
-	e.Start(":"+config.AppConfig.Server.Port)
+	server.Start(":"+config.AppConfig.Server.Port)
 
 
 }
