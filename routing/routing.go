@@ -25,9 +25,7 @@ func SetRout(e *echo.Echo)error {
 		return c.String(http.StatusOK,"helllllo")
 	})
 
-	g.GET("/get/*/foods",controller.Myfunc2)
-
-	g.GET("/get",controller.Myfunc3)
+	g.GET("/get/*",controller.Myfunc2)
 	
 	g.GET("/get/foods/id:",func(c echo.Context) error {
 		return c.String(http.StatusOK,"helllllo")
