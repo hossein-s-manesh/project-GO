@@ -1,0 +1,87 @@
+package db
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
+
+
+
+
+func Connect()  {
+
+	ctx:=context.TODO()
+
+	clinet,err:=mongo.Connect(ctx,options.Client().ApplyURI("mongodb://localhost:27017"))
+	if err!=nil{
+		log.Fatalln(err)
+	}
+
+	userCollections:=clinet.Database("hsm").Collection("users")
+
+	var ros bson.M
+	userCollections.FindOne(ctx,bson.D{}).Decode(&ros)
+	fmt.Println(ros)
+
+}
+
+
+
+
+<+++++++++++++++++++++++++++++++++++++++++++++++>
+
+
+
+
+package database
+
+import (
+	"context"
+	// "fmt"
+	// "log"
+
+	// "go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
+)
+
+
+type Db struct{
+	clinet  *mongo.Client
+}
+
+
+func Connect()(Db,error) {
+	ctx:=context.TODO()
+
+	clinet,err:=mongo.Connect(ctx,options.Client().ApplyURI("mongodb://localhost:27017"))
+
+	if err!=nil{
+		return Db{},err
+	}
+	
+	
+
+	// userCollections:=clinet.Database("hsm").Collection("users")
+
+	// var ros bson.M
+	// userCollections.FindOne(ctx,bson.D{}).Decode(&ros)
+	// fmt.Println(ros)
+
+
+
+	
+}
+
+
+
+func GetUsercollection(db Db) *mongo.Collection {
+	userCollections:=db.clinet.Database("hsm").Collection("users")
+	return userCollections
+}
