@@ -35,7 +35,7 @@ func main()  {
 
 	server:=echo.New()
 
-
+	fmt.Println(config.AppConfig.Server.Port)
 
 	
 	//routing
