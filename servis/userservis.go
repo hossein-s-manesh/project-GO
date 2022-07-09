@@ -1,10 +1,10 @@
 package servis
 
-import(
+import (
+	"fmt"
+	"log"
 	"myapp/model/user"
 	"myapp/repository"
-
-
 )
 
 type UserServis interface{
@@ -24,5 +24,10 @@ func NewUserServis()UserServis{
 func(userServis) GetServis() ([]user.Jasoner,error ){
 	userRepository :=repository.NewUserRipository()
 	userList,err:=userRepository.GetUserList()
+	user,err:=userRepository.GetById("62b3662376d085ebba7ce737")
+	if err !=nil{
+		log.Fatalln(err)
+	}
+	fmt.Println(user)
 	return userList,err
 }

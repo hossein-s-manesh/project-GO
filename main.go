@@ -19,6 +19,14 @@ import (
 func main()  {
 
 	// get config
+	err:=config.GetConfig()
+	if err !=nil{
+		log.Fatalln(err)
+	}
+
+
+
+
 	
 	db,err:=database.Connect()
 	if err !=nil{
@@ -50,6 +58,7 @@ func main()  {
 	//start server
 
 	server.Start(":"+config.AppConfig.Server.Port)
+	
 
 
 }
